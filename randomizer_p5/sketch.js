@@ -24,7 +24,7 @@ function setup() {
   background(200);
   textSize(32);
 
-  text("☟ Click to randomize ☟", 100, 300);
+  text("☟ Click to randomize ☟", 150, 300);
 
   // setTimeout(changeBackground, 1000);
 
@@ -63,7 +63,7 @@ function randomizer(){
     randomIndex = int(random(pokemon.length))
     text(`${pokemon[randomIndex].name}'s favorite color
     is
-    ${pokemon[randomIndex].color}`, 250, 300);
+    ${pokemon[randomIndex].color}`, 180, 300);
     pokemon.splice(randomIndex, 1);
   } else {
     background(random(200, 255));
