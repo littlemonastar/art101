@@ -41,9 +41,10 @@ function draw() {
 
   if(animating == true){
     square(random(width), random(height), random(50, 200));
+    ellipse(random(width), random(height), random(50, 200));
   }
 }
-// 
+//
 // function changeBackground(){
 //   if (counter <= 5){
 //     counter++;
