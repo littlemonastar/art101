@@ -19,6 +19,11 @@ let randomIndex;
 let animating = false;
 // let counter = 0;
 
+var r;
+var g;
+var b;
+var a;
+
 function setup() {
   createCanvas(600, 600);
   background(200);
@@ -39,7 +44,14 @@ function setup() {
 
 function draw() {
 
+  r = random(255);
+  g = random(100, 255);
+  b = random(255);
+  a = random(100, 255);
+
   if(animating == true){
+    fill(r, g, b, a);
+    stroke(random(255));
     square(random(width), random(height), random(50, 200));
     ellipse(random(width), random(height), random(50, 200));
   }
