@@ -17,12 +17,21 @@ let pokemon = [{
 
 let randomIndex;
 let animating = false;
-// let counter = 0;
+let pokemonster = [];
 
 var r;
 var g;
 var b;
 var a;
+
+function preload(){
+  for(let i = 0; i <= 15; i++){
+    pokemonster[i] = loadImage(`assets/
+      pokemon_${i}.png`)
+  }
+
+
+}
 
 function setup() {
   createCanvas(600, 600);
