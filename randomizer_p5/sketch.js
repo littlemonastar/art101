@@ -2,7 +2,7 @@ let pokemon = [{
   name: "pikachu",
   color: "yellow"
 }, {
-  name:"mimikyu",
+  name: "mimikyu",
   color: "light yellow"
 }, {
   name: "gengar",
@@ -18,28 +18,36 @@ let pokemon = [{
 let randomIndex;
 let animating = false;
 let pokemonster = [];
+let imageCounter = 0;
+let button;
 
 var r;
 var g;
 var b;
 var a;
 
-function preload(){
-  for(let i = 0; i <= 15; i++){
-    pokemonster[i] = loadImage(`assets/
-      pokemon_${i}.png`)
+function preload() {
+  for (let i = 0; i <= 4; i++) {
+    pokemonster[i] = loadImage(`assets/pokemon_${i}.png`);
   }
 
-
 }
+
+
 
 function setup() {
   createCanvas(600, 600);
   background(200);
   textSize(32);
+  textAlign(CENTER);
+  textStyle(BOLD);
+  imageMode(CENTER);
+  frameRate(8);
 
-  text("☟ Click to randomize ☟", 150, 300);
+  text("☟ Click to randomize ☟", 300, 300);
 
+  button = createButton("click to randomize");
+  button.mousePressed(buttonPressed);
   // setTimeout(changeBackground, 1000);
 
 
@@ -58,12 +66,20 @@ function draw() {
   b = random(255);
   a = random(100, 255);
 
-  if(animating == true){
-    fill(r, g, b, a);
-    stroke(random(255));
-    square(random(width), random(height), random(50, 200));
-    ellipse(random(width), random(height), random(50, 200));
+  if (animating == true) {
+    clear();
+    image(pokemonster[imageCounter], width / 2, height / 2);
+
+    if (imageCounter < pokemonster.length - 1){
+      imageCounter++;
+  } else {
+    imageCounter = 0;
   }
+  // fill(r, g, b, a);
+  // stroke(random(255));
+  // square(random(width), random(height), random(50, 200));
+  // ellipse(random(width), random(height), random(50, 200));
+}
 }
 //
 // function changeBackground(){
@@ -76,15 +92,17 @@ function draw() {
 // }
 // }
 
-function randomizer(){
+function randomizer() {
   animating = false;
-
-  if (pokemon[0]){
-    background(random(200, 255));
+  if (pokemon[0]) {
+    clear();
+    // background(random(200, 255));
     randomIndex = int(random(pokemon.length))
+    image(random(pokemonster), width / 2, height / 2);
     text(`${pokemon[randomIndex].name}'s favorite color
     is
-    ${pokemon[randomIndex].color}`, 180, 300);
+    ${pokemon[randomIndex].color}`, width/2, height/2);
+
     pokemon.splice(randomIndex, 1);
   } else {
     background(random(200, 255));
@@ -92,9 +110,9 @@ function randomizer(){
   }
 }
 
-function mousePressed(){
+function buttonPressed() {
   animating = true;
   setTimeout(randomizer, 2000);
 
 
-  }
+}
