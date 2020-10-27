@@ -14,6 +14,6 @@ canvas {
   margin: auto;
   top: 0;
   left: 0;
-  position: absolute;
+  position: block;
   z-index: -1;
 }
