@@ -10,10 +10,10 @@ body {
   font-family: fantasy;
 }
 
-canvas {
+/* canvas {
   margin: auto;
   top: 0;
   left: 0;
   position: block;
   z-index: -1;
-}
+} */
