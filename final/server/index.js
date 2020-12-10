@@ -8,7 +8,7 @@ const app = express();
 
 //const db = monk(process.env.MONGO_URI || 'localhost/meower');
 const db = monk('mongodb+srv://littlemonastar:sophie339@littlemonacluster.g4guu.mongodb.net/LittleMonaCluster?retryWrites=true&w=majority');
-const mews = db.get('mews');
+const ssss = db.get('ssss');
 const filter = new Filter();
 
 app.enable('trust proxy');
@@ -18,19 +18,19 @@ app.use(express.json());
 
 app.get('/', (req, res) => {
   res.json({
-    message: 'Meower! 😹 🐈'
+    message: 'SSSS~🐍'
   });
 });
 
-app.get('/mews', (req, res, next) => {
-  mews
+app.get('/ssss', (req, res, next) => {
+  ssss
     .find()
-    .then(mews => {
-      res.json(mews);
+    .then(ssss => {
+      res.json(ssss);
     }).catch(next);
 });
 
-app.get('/v2/mews', (req, res, next) => {
+app.get('/v2/ssss', (req, res, next) => {
   // let skip = Number(req.query.skip) || 0;
   // let limit = Number(req.query.limit) || 10;
   let { skip = 0, limit = 5, sort = 'desc' } = req.query;
@@ -41,9 +41,9 @@ app.get('/v2/mews', (req, res, next) => {
   limit = Math.min(50, Math.max(1, limit));
 
   Promise.all([
-    mews
+    ssss
       .count(),
-    mews
+    ssss
       .find({}, {
         skip,
         limit,
@@ -52,9 +52,9 @@ app.get('/v2/mews', (req, res, next) => {
         }
       })
   ])
-    .then(([ total, mews ]) => {
+    .then(([ total, ssss ]) => {
       res.json({
-        mews,
+        ssss,
         meta: {
           total,
           skip,
@@ -65,28 +65,30 @@ app.get('/v2/mews', (req, res, next) => {
     }).catch(next);
 });
 
-function isValidMew(mew) {
-  return mew.name && mew.name.toString().trim() !== '' && mew.name.toString().trim().length <= 50 &&
-    mew.content && mew.content.toString().trim() !== '' && mew.content.toString().trim().length <= 140;
+function isValidsss(sss) {
+  return sss.name && sss.name.toString().trim() !== '' && sss.name.toString().trim().length <= 50 &&
+    sss.content && sss.content.toString().trim() !== '' && sss.content.toString().trim().length <= 140;
 }
 
 app.use(rateLimit({
-  windowMs: 30 * 1000, // 30 seconds
+  //windowMs: 30 * 1000, // 30 seconds
+  windowMs: 1 * 1000, // 1 seconds
   max: 1
 }));
 
-const createMew = (req, res, next) => {
-  if (isValidMew(req.body)) {
-    const mew = {
+const createsss = (req, res, next) => {
+  console.log(req.body);
+  if (isValidsss(req.body)) {
+    const sss = {
       name: filter.clean(req.body.name.toString().trim()),
       content: filter.clean(req.body.content.toString().trim()),
       created: new Date()
     };
 
-    mews
-      .insert(mew)
-      .then(createdMew => {
-        res.json(createdMew);
+    ssss
+      .insert(sss)
+      .then(createdsss => {
+        res.json(createdsss);
       }).catch(next);
   } else {
     res.status(422);
@@ -96,8 +98,8 @@ const createMew = (req, res, next) => {
   }
 };
 
-app.post('/mews', createMew);
-app.post('/v2/mews', createMew);
+app.post('/ssss', createsss);
+app.post('/v2/ssss', createsss);
 
 app.use((error, req, res, next) => {
   res.status(500);

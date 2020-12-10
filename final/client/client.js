@@ -3,9 +3,9 @@ console.log('Hello World!');
 const form = document.querySelector('form'); // grabbing an element on the page
 const errorElement = document.querySelector('.error-message');
 const loadingElement = document.querySelector('.loading');
-const mewsElement = document.querySelector('.mews');
+const ssssElement = document.querySelector('.ssss');
 const loadMoreElement = document.querySelector('#loadMore');
-const API_URL = (window.location.hostname === '127.0.0.1' || window.location.hostname === 'localhost') ? 'http://localhost:5000/v2/mews' : 'https://meower-api.now.sh/v2/mews';
+const API_URL = (window.location.hostname === '127.0.0.1' || window.location.hostname === 'localhost') ? 'http://localhost:5000/v2/ssss' : 'https://meower-api.now.sh/v2/ssss';
 
 let skip = 0;
 let limit = 5;
@@ -15,13 +15,19 @@ let finished = false;
 errorElement.style.display = 'none';
 
 document.addEventListener('scroll', () => {
+  console.log("scroll");
+  console.log(loading);
+  console.log(finished);
   const rect = loadMoreElement.getBoundingClientRect();
   if (rect.top < window.innerHeight && !loading && !finished) {
+    console.log("loadMore");
     loadMore();
   }
+  console.log(rect.top);
+  console.log(window.innerHeight);
 });
 
-listAllMews();
+listAllssss();
 
 form.addEventListener('submit', (event) => {
   event.preventDefault();
@@ -34,18 +40,18 @@ form.addEventListener('submit', (event) => {
     form.style.display = 'none';
     loadingElement.style.display = '';
 
-    const mew = {
+    const sss = {
       name,
       content
     };
-    
+
     fetch(API_URL, {
       method: 'POST',
-      body: JSON.stringify(mew),
+      body: JSON.stringify(sss),
       headers: {
         'content-type': 'application/json'
       }
-    }).then(response => {      
+    }).then(response => {
       if (!response.ok) {
         const contentType = response.headers.get('content-type');
         if (contentType.includes('json')) {
@@ -58,8 +64,8 @@ form.addEventListener('submit', (event) => {
       form.reset();
       setTimeout(() => {
         form.style.display = '';
-      }, 30000);
-      listAllMews();
+      }, 1000);
+      listAllssss();
     }).catch(errorMessage => {
       form.style.display = '';
       errorElement.textContent = errorMessage;
@@ -74,36 +80,36 @@ form.addEventListener('submit', (event) => {
 
 function loadMore() {
   skip += limit;
-  listAllMews(false);
+  listAllssss(false);
 }
 
-function listAllMews(reset = true) {
+function listAllssss(reset = true) {
   loading = true;
   if (reset) {
-    mewsElement.innerHTML = '';
+    ssssElement.innerHTML = '';
     skip = 0;
     finished = false;
   }
   fetch(`${API_URL}?skip=${skip}&limit=${limit}`)
     .then(response => response.json())
     .then(result => {
-      result.mews.forEach(mew => {
+      result.ssss.forEach(sss => {
         const div = document.createElement('div');
 
         const header = document.createElement('h3');
-        header.textContent = mew.name;
+        header.textContent = sss.name;
 
         const contents = document.createElement('p');
-        contents.textContent = mew.content;
+        contents.textContent = sss.content;
 
         const date = document.createElement('small');
-        date.textContent = new Date(mew.created);
+        date.textContent = new Date(sss.created);
 
         div.appendChild(header);
         div.appendChild(contents);
         div.appendChild(date);
 
-        mewsElement.appendChild(div);
+        ssssElement.appendChild(div);
       });
       loadingElement.style.display = 'none';
       if (!result.meta.has_more) {
