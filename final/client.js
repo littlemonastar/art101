@@ -5,7 +5,7 @@ const errorElement = document.querySelector('.error-message');
 const loadingElement = document.querySelector('.loading');
 const ssssElement = document.querySelector('.ssss');
 const loadMoreElement = document.querySelector('#loadMore');
-const API_URL = (window.location.hostname === '127.0.0.1' || window.location.hostname === 'localhost') ? 'http://localhost:5000/v2/ssss' : 'https://meower-api.now.sh/v2/ssss';
+const API_URL = (window.location.hostname === '127.0.0.1' || window.location.hostname === 'localhost') ? 'http://localhost:5000/v2/ssss' : 'https://mona-ssss.herokuapp.com/v2/ssss';
 
 let skip = 0;
 let limit = 5;
