@@ -67,7 +67,7 @@ app.get('/v2/ssss', (req, res, next) => {
 
 function isValidsss(sss) {
   return sss.name && sss.name.toString().trim() !== '' && sss.name.toString().trim().length <= 50 &&
-    sss.content && sss.content.toString().trim() !== '' && sss.content.toString().trim().length <= 140;
+    sss.content && sss.content.toString().trim() !== '' && sss.content.toString().trim().length <= 400;
 }
 
 app.use(rateLimit({
@@ -93,7 +93,7 @@ const createsss = (req, res, next) => {
   } else {
     res.status(422);
     res.json({
-      message: 'Hey! Name and Content are required! Name cannot be longer than 50 characters. Content cannot be longer than 140 characters.'
+      message: 'Hey! Name and Comment are required! Name cannot be longer than 50 characters. Comment cannot be longer than 400 characters.'
     });
   }
 };

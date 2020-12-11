@@ -81,6 +81,8 @@ form.addEventListener('submit', (event) => {
 function loadMore() {
   skip += limit;
   listAllssss(false);
+
+  
 }
 
 function listAllssss(reset = true) {
